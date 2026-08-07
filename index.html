@@ -14,99 +14,1321 @@
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #0d0d0d;
-      color: #ffffff;
+      background:
+        radial-gradient(circle at top, #242424, #0b0b0b 45%);
+      color: white;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    .container {
-      width: 90%;
-      max-width: 650px;
+    .wrapper {
+      width: 92%;
+      max-width: 850px;
+      margin: auto;
+      padding: 50px 0 70px;
+    }
+
+    header {
       text-align: center;
-      padding: 50px 30px;
-    }
-
-    h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
-
-    .subtitle {
-      color: #bdbdbd;
-      font-size: 18px;
-      line-height: 1.6;
       margin-bottom: 35px;
     }
 
-    .card {
-      background: #171717;
-      border: 1px solid #292929;
-      border-radius: 16px;
-      padding: 25px;
-      margin-top: 25px;
+    h1 {
+      margin: 0;
+      font-size: 42px;
     }
 
-    .card h2 {
+    header p {
+      color: #aaa;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .card {
+      background: rgba(24, 24, 24, 0.96);
+      border: 1px solid #303030;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
       margin-top: 0;
       font-size: 20px;
     }
 
-    .card p {
-      color: #aaaaaa;
-      line-height: 1.6;
-      margin-bottom: 0;
+    label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea,
+    select,
+    input[type="file"] {
+      width: 100%;
+      background: #101010;
+      color: white;
+      border: 1px solid #383838;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    textarea {
+      min-height: 105px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 13px 20px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .connect-btn {
+      background: #ffffff;
+      color: #111;
+    }
+
+    .post-btn {
+      width: 100%;
+      margin-top: 22px;
+      background: #fff;
+      color: #111;
+      font-size: 16px;
+    }
+
+    button:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .creator {
+      display: none;
+      align-items: center;
+      gap: 14px;
+      margin-top: 18px;
+      background: #101010;
+      border-radius: 12px;
+      padding: 13px;
+    }
+
+    .creator img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .muted {
+      color: #999;
+      font-size: 13px;
+    }
+
+    video {
+      width: 100%;
+      max-height: 430px;
+      margin-top: 15px;
+      background: #000;
+      border-radius: 12px;
+      display: none;
+    }
+
+    .checks {
+      margin-top: 12px;
+    }
+
+    .checks label {
+      font-weight: normal;
+      margin: 10px 0;
+    }
+
+    .commercial-box {
+      display: none;
+      margin-top: 12px;
+      padding: 14px;
+      background: #101010;
+      border-radius: 10px;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 13px;
+      background: #101010;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    #status {
+      display: none;
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 10px;
+      background: #101010;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #777777;
+      text-align: center;
+      color: #777;
+      margin-top: 35px;
+      font-size: 13px;
     }
 
     footer a {
-      color: #aaaaaa;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: #ffffff;
+      color: #aaa;
+      margin: 0 8px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="wrapper">
 
+  <header>
     <h1>ASMR Food</h1>
 
-    <p class="subtitle">
-      Create and manage satisfying ASMR food content
-      and publish videos through our content workflow.
+    <p>
+      Create, preview and publish original ASMR food videos
+      to your authorized creator account.
+    </p>
+  </header>
+
+
+  <!-- ACCOUNT -->
+  <div class="card">
+
+    <h2>1. Creator account</h2>
+
+    <p class="muted">
+      Connect your account before preparing your publication.
     </p>
 
-    <div class="card">
-      <h2>About ASMR Food</h2>
+    <button
+      class="connect-btn"
+      id="connectButton"
+      onclick="connectTikTok()"
+    >
+      Connect with TikTok
+    </button>
 
-      <p>
-        ASMR Food is a web application designed to manage
-        short-form ASMR food videos and connect the content
-        publishing workflow with TikTok.
-      </p>
+
+    <div class="creator" id="creatorBox">
+
+      <img
+        id="creatorAvatar"
+        alt="Creator avatar"
+      >
+
+      <div>
+        <strong id="creatorNickname"></strong>
+        <div
+          class="muted"
+          id="creatorUsername"
+        ></div>
+      </div>
+
     </div>
 
-    <footer>
-      <a href="terms">Terms of Service</a>
-      <a href="privacy">Privacy Policy</a>
+  </div>
 
-      <p>© 2026 ASMR Food</p>
-    </footer>
+
+  <!-- VIDEO -->
+  <div class="card">
+
+    <h2>2. Choose your video</h2>
+
+    <input
+      type="file"
+      id="videoFile"
+      accept="video/mp4,video/quicktime,video/webm"
+    >
+
+    <video
+      id="videoPreview"
+      controls
+    ></video>
+
+    <p
+      class="muted"
+      id="durationInfo"
+    ></p>
 
   </div>
+
+
+  <!-- POST SETTINGS -->
+  <div class="card">
+
+    <h2>3. Post settings</h2>
+
+
+    <label for="caption">
+      Caption
+    </label>
+
+    <textarea
+      id="caption"
+      maxlength="2200"
+      placeholder="Write your caption and hashtags..."
+    ></textarea>
+
+
+    <label for="privacy">
+      Privacy
+    </label>
+
+    <select id="privacy">
+      <option value="">
+        Select privacy
+      </option>
+    </select>
+
+
+    <label>
+      Interactions
+    </label>
+
+    <div class="checks">
+
+      <label>
+        <input
+          type="checkbox"
+          id="allowComments"
+        >
+        Allow comments
+      </label>
+
+      <label>
+        <input
+          type="checkbox"
+          id="allowDuet"
+        >
+        Allow Duet
+      </label>
+
+      <label>
+        <input
+          type="checkbox"
+          id="allowStitch"
+        >
+        Allow Stitch
+      </label>
+
+    </div>
+
+
+    <label>
+      Content disclosure
+    </label>
+
+    <div class="checks">
+
+      <label>
+        <input
+          type="checkbox"
+          id="commercialToggle"
+        >
+        This content promotes a brand,
+        product or service
+      </label>
+
+    </div>
+
+
+    <div
+      class="commercial-box"
+      id="commercialBox"
+    >
+
+      <label>
+        <input
+          type="checkbox"
+          id="yourBrand"
+        >
+        Your brand
+      </label>
+
+      <label>
+        <input
+          type="checkbox"
+          id="brandedContent"
+        >
+        Branded content
+      </label>
+
+      <p
+        class="muted"
+        id="commercialMessage"
+      ></p>
+
+    </div>
+
+
+    <label>
+      AI-generated content
+    </label>
+
+    <div class="checks">
+
+      <label>
+        <input
+          type="checkbox"
+          id="aiGenerated"
+        >
+        This video contains AI-generated content
+      </label>
+
+    </div>
+
+
+    <div class="notice">
+
+      <div id="policyDeclaration">
+        By posting, you agree to TikTok's Music Usage Confirmation.
+      </div>
+
+      <br>
+
+      Your video may take a few minutes to process
+      and appear on your profile.
+
+    </div>
+
+
+    <div class="checks">
+
+      <label>
+        <input
+          type="checkbox"
+          id="publishConsent"
+        >
+        I confirm that I reviewed this video
+        and want to publish it.
+      </label>
+
+    </div>
+
+
+    <button
+      class="post-btn"
+      id="postButton"
+      disabled
+    >
+      Post to TikTok
+    </button>
+
+
+    <div id="status">
+      Ready
+    </div>
+
+  </div>
+
+
+  <footer>
+
+    <a href="terms">
+      Terms of Service
+    </a>
+
+    <a href="privacy">
+      Privacy Policy
+    </a>
+
+    <p>© 2026 ASMR Food</p>
+
+  </footer>
+
+</div>
+
+
+<script>
+
+/*
+ * ==========================================
+ * CONFIGURATION
+ * ==========================================
+ *
+ * Ton secret TikTok ne doit JAMAIS être ici.
+ * Tout ce qui utilise le client_secret doit
+ * rester dans n8n.
+ */
+
+const API_BASE =
+  "https://distinct-nacho-customary.ngrok-free.dev";
+
+/*
+ * Modifie ces chemins pour qu'ils correspondent
+ * exactement à tes Webhooks n8n.
+ */
+
+const LOGIN_URL =
+  API_BASE + "/webhook/tiktok-login";
+
+const CREATOR_INFO_URL =
+  API_BASE + "/webhook/tiktok-creator-info";
+
+const PUBLISH_URL =
+  API_BASE + "/webhook/tiktok-publish";
+
+const STATUS_URL =
+  API_BASE + "/webhook/tiktok-status";
+
+
+let connected = false;
+let creatorInfo = null;
+let selectedVideo = null;
+let sessionId = null;
+
+
+/*
+ * ==========================================
+ * SESSION
+ * ==========================================
+ */
+
+const params =
+  new URLSearchParams(window.location.search);
+
+sessionId =
+  params.get("session");
+
+
+/*
+ * ==========================================
+ * LOGIN
+ * ==========================================
+ */
+
+function connectTikTok() {
+
+  window.location.href =
+    LOGIN_URL;
+}
+
+
+/*
+ * ==========================================
+ * CREATOR INFO
+ * ==========================================
+ */
+
+async function loadCreatorInfo() {
+
+  if (!sessionId) {
+    return;
+  }
+
+  try {
+
+    const response = await fetch(
+      CREATOR_INFO_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          session: sessionId
+        })
+      }
+    );
+
+    const data =
+      await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.message ||
+        "Unable to retrieve creator information."
+      );
+    }
+
+    creatorInfo = data;
+    connected = true;
+
+
+    /*
+     * Creator identity
+     */
+
+    document
+      .getElementById("creatorBox")
+      .style.display = "flex";
+
+    document
+      .getElementById("creatorNickname")
+      .textContent =
+        data.creator_nickname || "Creator";
+
+    document
+      .getElementById("creatorUsername")
+      .textContent =
+        data.creator_username
+          ? "@" + data.creator_username
+          : "";
+
+    if (data.creator_avatar_url) {
+
+      document
+        .getElementById("creatorAvatar")
+        .src =
+          data.creator_avatar_url;
+    }
+
+
+    /*
+     * Privacy
+     *
+     * IMPORTANT:
+     * aucune valeur sélectionnée par défaut.
+     */
+
+    const privacy =
+      document.getElementById("privacy");
+
+    privacy.innerHTML =
+      '<option value="">Select privacy</option>';
+
+    const labels = {
+
+      PUBLIC_TO_EVERYONE:
+        "Everyone",
+
+      MUTUAL_FOLLOW_FRIENDS:
+        "Friends",
+
+      FOLLOWER_OF_CREATOR:
+        "Followers",
+
+      SELF_ONLY:
+        "Only me"
+
+    };
+
+    (
+      data.privacy_level_options || []
+    ).forEach(level => {
+
+      const option =
+        document.createElement("option");
+
+      option.value = level;
+
+      option.textContent =
+        labels[level] || level;
+
+      privacy.appendChild(option);
+
+    });
+
+
+    /*
+     * Interaction capabilities
+     */
+
+    configureInteraction(
+      "allowComments",
+      data.comment_disabled
+    );
+
+    configureInteraction(
+      "allowDuet",
+      data.duet_disabled
+    );
+
+    configureInteraction(
+      "allowStitch",
+      data.stitch_disabled
+    );
+
+
+    document
+      .getElementById("connectButton")
+      .textContent =
+        "Account connected";
+
+
+    validateForm();
+
+  }
+
+  catch (error) {
+
+    showStatus(
+      error.message,
+      true
+    );
+  }
+}
+
+
+function configureInteraction(
+  id,
+  disabledByTikTok
+) {
+
+  const checkbox =
+    document.getElementById(id);
+
+  /*
+   * TikTok exige que les cases
+   * soient décochées par défaut.
+   */
+
+  checkbox.checked = false;
+
+  checkbox.disabled =
+    Boolean(disabledByTikTok);
+}
+
+
+/*
+ * ==========================================
+ * VIDEO PREVIEW
+ * ==========================================
+ */
+
+document
+  .getElementById("videoFile")
+  .addEventListener(
+    "change",
+    function () {
+
+      selectedVideo =
+        this.files[0] || null;
+
+      if (!selectedVideo) {
+        return;
+      }
+
+      const preview =
+        document.getElementById(
+          "videoPreview"
+        );
+
+      preview.src =
+        URL.createObjectURL(
+          selectedVideo
+        );
+
+      preview.style.display =
+        "block";
+
+
+      preview.onloadedmetadata =
+        function () {
+
+          const duration =
+            preview.duration;
+
+          document
+            .getElementById(
+              "durationInfo"
+            )
+            .textContent =
+              `Duration: ${duration.toFixed(1)} seconds`;
+
+
+          if (
+            creatorInfo &&
+            creatorInfo
+              .max_video_post_duration_sec &&
+            duration >
+              creatorInfo
+                .max_video_post_duration_sec
+          ) {
+
+            showStatus(
+              "This video exceeds the maximum duration allowed for this creator.",
+              true
+            );
+
+          }
+
+          validateForm();
+        };
+    }
+  );
+
+
+/*
+ * ==========================================
+ * COMMERCIAL CONTENT
+ * ==========================================
+ */
+
+const commercialToggle =
+  document.getElementById(
+    "commercialToggle"
+  );
+
+const commercialBox =
+  document.getElementById(
+    "commercialBox"
+  );
+
+const yourBrand =
+  document.getElementById(
+    "yourBrand"
+  );
+
+const brandedContent =
+  document.getElementById(
+    "brandedContent"
+  );
+
+
+commercialToggle.addEventListener(
+  "change",
+  function () {
+
+    commercialBox.style.display =
+      this.checked
+        ? "block"
+        : "none";
+
+    if (!this.checked) {
+
+      yourBrand.checked = false;
+      brandedContent.checked = false;
+
+    }
+
+    updateCommercialState();
+    validateForm();
+  }
+);
+
+
+yourBrand.addEventListener(
+  "change",
+  () => {
+
+    updateCommercialState();
+    validateForm();
+
+  }
+);
+
+
+brandedContent.addEventListener(
+  "change",
+  () => {
+
+    updateCommercialState();
+    validateForm();
+
+  }
+);
+
+
+document
+  .getElementById("privacy")
+  .addEventListener(
+    "change",
+    () => {
+
+      updateCommercialState();
+      validateForm();
+
+    }
+  );
+
+
+function updateCommercialState() {
+
+  const privacy =
+    document.getElementById(
+      "privacy"
+    ).value;
+
+  const message =
+    document.getElementById(
+      "commercialMessage"
+    );
+
+  const declaration =
+    document.getElementById(
+      "policyDeclaration"
+    );
+
+
+  /*
+   * Branded Content ne peut pas être
+   * SELF_ONLY.
+   */
+
+  if (privacy === "SELF_ONLY") {
+
+    brandedContent.disabled = true;
+
+    if (brandedContent.checked) {
+      brandedContent.checked = false;
+    }
+
+  } else {
+
+    brandedContent.disabled = false;
+
+  }
+
+
+  /*
+   * Message commercial
+   */
+
+  if (
+    brandedContent.checked
+  ) {
+
+    message.textContent =
+      "Your video will be labeled as 'Paid partnership'.";
+
+    declaration.textContent =
+      "By posting, you agree to TikTok's Branded Content Policy and Music Usage Confirmation.";
+
+  }
+
+  else if (
+    yourBrand.checked
+  ) {
+
+    message.textContent =
+      "Your video will be labeled as 'Promotional content'.";
+
+    declaration.textContent =
+      "By posting, you agree to TikTok's Music Usage Confirmation.";
+
+  }
+
+  else {
+
+    message.textContent = "";
+
+    declaration.textContent =
+      "By posting, you agree to TikTok's Music Usage Confirmation.";
+
+  }
+}
+
+
+/*
+ * ==========================================
+ * VALIDATION
+ * ==========================================
+ */
+
+[
+  "caption",
+  "privacy",
+  "allowComments",
+  "allowDuet",
+  "allowStitch",
+  "aiGenerated",
+  "publishConsent"
+].forEach(id => {
+
+  document
+    .getElementById(id)
+    .addEventListener(
+      "change",
+      validateForm
+    );
+});
+
+
+function validateForm() {
+
+  const postButton =
+    document.getElementById(
+      "postButton"
+    );
+
+  let valid =
+    connected &&
+    selectedVideo &&
+    document
+      .getElementById("privacy")
+      .value &&
+    document
+      .getElementById(
+        "publishConsent"
+      )
+      .checked;
+
+
+  /*
+   * Commercial content activé :
+   * au moins une catégorie requise.
+   */
+
+  if (
+    commercialToggle.checked &&
+    !yourBrand.checked &&
+    !brandedContent.checked
+  ) {
+
+    valid = false;
+  }
+
+
+  /*
+   * Vérification durée.
+   */
+
+  const preview =
+    document.getElementById(
+      "videoPreview"
+    );
+
+  if (
+    creatorInfo &&
+    creatorInfo
+      .max_video_post_duration_sec &&
+    preview.duration &&
+    preview.duration >
+      creatorInfo
+        .max_video_post_duration_sec
+  ) {
+
+    valid = false;
+  }
+
+
+  postButton.disabled =
+    !valid;
+}
+
+
+/*
+ * ==========================================
+ * PUBLISH
+ * ==========================================
+ */
+
+document
+  .getElementById("postButton")
+  .addEventListener(
+    "click",
+    publishVideo
+  );
+
+
+async function publishVideo() {
+
+  validateForm();
+
+  if (
+    document
+      .getElementById(
+        "postButton"
+      )
+      .disabled
+  ) {
+    return;
+  }
+
+
+  showStatus(
+    "Uploading video..."
+  );
+
+
+  const form =
+    new FormData();
+
+  form.append(
+    "session",
+    sessionId
+  );
+
+  form.append(
+    "video",
+    selectedVideo
+  );
+
+  form.append(
+    "title",
+    document
+      .getElementById(
+        "caption"
+      )
+      .value
+  );
+
+  form.append(
+    "privacy_level",
+    document
+      .getElementById(
+        "privacy"
+      )
+      .value
+  );
+
+  form.append(
+    "allow_comment",
+    document
+      .getElementById(
+        "allowComments"
+      )
+      .checked
+  );
+
+  form.append(
+    "allow_duet",
+    document
+      .getElementById(
+        "allowDuet"
+      )
+      .checked
+  );
+
+  form.append(
+    "allow_stitch",
+    document
+      .getElementById(
+        "allowStitch"
+      )
+      .checked
+  );
+
+  form.append(
+    "commercial_content",
+    commercialToggle.checked
+  );
+
+  form.append(
+    "your_brand",
+    yourBrand.checked
+  );
+
+  form.append(
+    "branded_content",
+    brandedContent.checked
+  );
+
+  form.append(
+    "is_aigc",
+    document
+      .getElementById(
+        "aiGenerated"
+      )
+      .checked
+  );
+
+
+  try {
+
+    const response =
+      await fetch(
+        PUBLISH_URL,
+        {
+          method: "POST",
+          body: form
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.message ||
+        "Publishing failed."
+      );
+    }
+
+
+    if (!data.publish_id) {
+
+      throw new Error(
+        "No publish ID returned."
+      );
+    }
+
+
+    showStatus(
+      "Video uploaded. TikTok is processing the post..."
+    );
+
+
+    pollStatus(
+      data.publish_id
+    );
+
+  }
+
+  catch (error) {
+
+    showStatus(
+      error.message,
+      true
+    );
+  }
+}
+
+
+/*
+ * ==========================================
+ * STATUS
+ * ==========================================
+ */
+
+async function pollStatus(
+  publishId
+) {
+
+  let attempts = 0;
+
+  const timer =
+    setInterval(
+      async () => {
+
+        attempts++;
+
+        try {
+
+          const response =
+            await fetch(
+              STATUS_URL,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify({
+                    session:
+                      sessionId,
+
+                    publish_id:
+                      publishId
+                  })
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          if (
+            data.status ===
+            "PUBLISH_COMPLETE"
+          ) {
+
+            clearInterval(timer);
+
+            showStatus(
+              "Published successfully."
+            );
+
+          }
+
+
+          else if (
+            data.status ===
+            "FAILED"
+          ) {
+
+            clearInterval(timer);
+
+            showStatus(
+              "Publishing failed: " +
+              (
+                data.fail_reason ||
+                "Unknown error"
+              ),
+              true
+            );
+
+          }
+
+
+          else {
+
+            showStatus(
+              "TikTok is processing the video..."
+            );
+
+          }
+
+
+          if (attempts >= 30) {
+
+            clearInterval(timer);
+
+            showStatus(
+              "Processing is taking longer than expected. Please check again later."
+            );
+          }
+
+        }
+
+        catch (error) {
+
+          clearInterval(timer);
+
+          showStatus(
+            error.message,
+            true
+          );
+
+        }
+
+      },
+      5000
+    );
+}
+
+
+function showStatus(
+  message,
+  error = false
+) {
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+  status.style.display =
+    "block";
+
+  status.textContent =
+    message;
+
+  status.style.color =
+    error
+      ? "#ff7d7d"
+      : "#ffffff";
+}
+
+
+/*
+ * Chargement après retour OAuth
+ */
+
+loadCreatorInfo();
+
+</script>
 
 </body>
 </html>
